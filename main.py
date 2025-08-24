@@ -1,6 +1,6 @@
 import os
 import random
-import qrcode
+#import qrcode
 from manim import *
 from manim_slides import Slide
 
