@@ -1030,13 +1030,59 @@ class Main(Slide, MovingCameraScene):
 
 
     def construct(self):
-        self.wait_time_between_slides = 0.10
-        self.construct_intro()
-        self.construct_trialintro()
-        self.construct_gsdesign()
-        self.construct_rar()
-        self.construct_bayes()
-        self.construct_simstudy()
-        self.construct_results()
-        self.construct_conclusion()
-        self.construct_qr()
+       self.wait_time_between_slides = 0.10
+       self.construct_intro()
+       self.construct_trialintro()
+       self.construct_gsdesign()
+       self.construct_rar()
+       self.construct_bayes()
+       self.construct_simstudy()
+       self.construct_results()
+       self.construct_conclusion()
+       self.construct_qr()
+
+# # ---------- Scenes split by section ----------
+# class Intro(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_intro()
+
+# class TrialIntro(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_trialintro()
+
+# class GSDDesign(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_gsdesign()
+
+# class RAR(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_rar()
+
+# class BayesianMethods(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_bayes()
+
+# class SimulationStudy(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_simstudy()
+
+# class Results(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_results()
+
+# class Conclusion(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_conclusion()
+
+# class QR(Main,Slide, MovingCameraScene):
+#     def construct(self):
+#         self.wait_time_between_slides = 0.10
+#         self.construct_qr()
