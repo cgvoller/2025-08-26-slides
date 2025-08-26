@@ -841,8 +841,8 @@ class Main(Slide, MovingCameraScene):
 # Add in priors
         prior_group = MathTex(
         r"\text{Priors } = \begin{cases}"
-        r"\theta \sim N(\mu_1 - \mu_2,\sigma_1^2 + \sigma_2^2) \\"
-        r"\mu_j \sim N(\mu_j,\sigma_j^2)"
+        r"\theta \sim N(\mu_{0,1} - \mu_{0,2},\sigma_{0,1^2} + \sigma_{0,2^2}) \\"
+        r"\mu_j \sim N(\mu_{0,j},\sigma_{0,j^2})"
         r"\end{cases}",
         font_size=28,
         color=BLACK
@@ -909,7 +909,7 @@ class Main(Slide, MovingCameraScene):
         run_time=1.5
         )
 
-
+        self.next_slide()
 # Add vertical line animation
         current_x = ValueTracker(mu)
 
@@ -967,7 +967,7 @@ class Main(Slide, MovingCameraScene):
         self.add(area)
         self.play(a.animate.set_value(mu - 2), b.animate.set_value(mu + 2), run_time=3)
         self.play(a.animate.set_value(mu - 1), b.animate.set_value(mu + 1), run_time=3)
-        self.wait()
+        self.next_slide()
 
         self.play(
             self.wipe(self.mobjects_without_canvas, [],return_animation=True)
@@ -989,7 +989,7 @@ class Main(Slide, MovingCameraScene):
         
         self.next_slide(notes="Results")
         self.new_clean_slide("GSD + RAR, Expected Sample Sizes")
-        ess = ImageMobject("Images/ess_group.png").scale(0.5)
+        ess = ImageMobject("Images/ess_group.png").scale(0.45)
         title_bottom_y = self.slide_title.get_bottom()[1]
         ess.set_y(title_bottom_y - buff - ess.height / 2)
         ess.set_x(0)    

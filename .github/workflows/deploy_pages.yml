@@ -22,6 +22,7 @@ env:
   SCENES: 'Main'  # Space-separated list of scenes to render
   USES_TEX: true  # true or false - disabling this will make the action run faster
   DISPLAY: :99  # Do not touch this
+  SITE_DIR: '_site'
 
 jobs:
   # Single deploy job since we're just deploying
