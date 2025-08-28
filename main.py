@@ -247,22 +247,17 @@ class Main(Slide, MovingCameraScene):
             label = Text(phase, font_size=20)
             text_lines = VGroup(*[Text(line, font_size=16) for line in lines]).arrange(DOWN, aligned_edge=LEFT, buff=0.05)
 
-            # Stack circle + label first
             top_group = VGroup(circle, label).arrange(DOWN, buff=0.1)
-            # Then add text below
             phase_group = VGroup(top_group, text_lines).arrange(DOWN, buff=0.1)
             circles.add(phase_group)
 
-        # Arrange horizontally by **circle centers only**
         circles.arrange(RIGHT, buff=2)
         for pg in circles:
-            circle = pg[0][0]     # the circle inside the top_group
-            label = pg[0][1]      # the label
-            text_lines = pg[1]    # the text lines group
+            circle = pg[0][0]    
+            label = pg[0][1]      
+            text_lines = pg[1]   
 
-            # Move circle baseline to same y-coordinate
-            circle.move_to([circle.get_center()[0], 0, 0])  # align all circles to y=0
-            # Position label and text relative to circle
+            circle.move_to([circle.get_center()[0], 0, 0]) 
             label.next_to(circle, DOWN, buff=0.1)
             text_lines.next_to(label, DOWN, buff=0.05)
 
@@ -270,15 +265,13 @@ class Main(Slide, MovingCameraScene):
         circles.scale_to_fit_width(config.frame_width - 2)
         circles.next_to(contents, DOWN, buff=1)
 
-        # --- Show first circle + text ---
         self.play(FadeIn(*circles[0].submobjects), run_time=1.2)
         self.play(self.camera.frame.animate.move_to(circles[0][0][0].get_center()).set(width=5), run_time=1.5)
         self.next_slide()
 
-        # Animate arrows + next phases
         for i in range(len(circles) - 1):
-            start = circles[i][0][0].get_right()  # circle right
-            end = circles[i + 1][0][0].get_left()  # next circle left
+            start = circles[i][0][0].get_right()  
+            end = circles[i + 1][0][0].get_left()  
             arrow = Arrow(start, end, buff=0, color=YELLOW)
             self.play(
                 AnimationGroup(
@@ -291,7 +284,6 @@ class Main(Slide, MovingCameraScene):
             )
             self.next_slide()
 
-        # Zoom out to full view
         self.play(Restore(self.camera.frame), run_time=1)
         self.next_slide()
         #self.play(self.wipe(self.mobjects_without_canvas, return_animation=True))
@@ -300,53 +292,43 @@ class Main(Slide, MovingCameraScene):
         self.next_slide(notes="Adaptive Designs")
         self.new_clean_slide("Adaptive Designs")
 
-        # === Titles ===
         title1 = Text("Traditional fixed-sample design:", slant=ITALIC, color=BLACK).scale(0.6)
         title2 = Text("Adaptive design:", slant=ITALIC, color=BLACK).scale(0.6)
 
-        # === Traditional Flow Boxes ===
         design1 = self.create_block("Design", BLUE)
-        conduct1 = self.create_block("Conduct", GREEN, width=5.0)  # double width
+        conduct1 = self.create_block("Conduct", GREEN, width=5.0)  
         analyse1 = self.create_block("Analyse", RED)
 
-        # Position title1 and traditional boxes
         title1.next_to(self.slide_title, DOWN)
-        design1.move_to([-4.75, title1.get_bottom()[1] - 0.8, 0])  # shifted further left
+        design1.move_to([-4.75, title1.get_bottom()[1] - 0.8, 0])
         conduct1.next_to(design1, RIGHT, buff=1.5)
         analyse1.next_to(conduct1, RIGHT, buff=1.5)
 
-        # Arrows (Traditional)
         arrow1 = Arrow(design1.get_right(), conduct1.get_left(), buff=0.1, color=BLACK)
         arrow2 = Arrow(conduct1.get_right(), analyse1.get_left(), buff=0.1, color=BLACK)
 
         self.next_slide()
-        # === Adaptive Flow Boxes ===
         design2 = self.create_block("Design", BLUE)
         conduct2 = self.create_block("Conduct", GREEN, width=5.0)
         analyse2 = self.create_block("Analyse", RED)
         review = self.create_block("Review", GRAY)
         adapt = self.create_block("Adapt", GRAY)
 
-        # Position title2
         title2.next_to(title1, DOWN, buff=1.5).align_to(title1, LEFT)
 
-        # Lower the adaptive flow by about one box height
         design2.move_to([design1.get_center()[0], title2.get_bottom()[1] - 2.3, 0])
         conduct2.next_to(design2, RIGHT, buff=1.5)
         analyse2.next_to(conduct2, RIGHT, buff=1.5)
 
-        # Review/Adapt above conduct but still under title
         review.move_to(conduct2.get_top() + UP * 1.0)
         adapt.next_to(review, LEFT, buff=1.5)
 
-        # Arrows (Adaptive)
         a1 = Arrow(design2.get_right(), conduct2.get_left(), buff=0.1, color=BLACK)
         a2 = Arrow(conduct2.get_right(), analyse2.get_left(), buff=0.1, color=BLACK)
         a3 = Arrow(conduct2.get_top(), review.get_bottom(), buff=0.1, color=BLACK)
         a4 = Arrow(review.get_left(), adapt.get_right(), buff=0.1, color=BLACK)
         a5 = Arrow(adapt.get_bottom(), conduct2.get_top(), buff=0.1, color=BLACK)
 
-        # Animations
         self.play(Write(title1))
         self.play(FadeIn(design1), FadeIn(conduct1), FadeIn(analyse1))
         self.play(GrowArrow(arrow1), GrowArrow(arrow2))
@@ -676,7 +658,7 @@ class Main(Slide, MovingCameraScene):
         self.next_slide()  
         p = 0.5  # Example probability
         chart = BarChart(
-            values=[p * 100, (1 - p) * 100],  # Convert to percentages
+            values=[p * 100, (1 - p) * 100],  
             y_range=[0, 100, 10],
             y_length=3,
             x_length=2.5,
@@ -852,17 +834,10 @@ class Main(Slide, MovingCameraScene):
             r"\text{Type I error } \alpha = 0.025 \quad \text{and power } 1-\beta = 0.9 \quad \text{at } \theta = \delta",
             font_size=26
         )
-
-        # Group all items like in a block
         block_content = VGroup(intro_text, item1, item2, item3, item4, footer).arrange(DOWN, aligned_edge=LEFT, buff=0.4)
-
-        # Surrounding box
         block = VGroup(block_content)
-
-        # Position under title
         block.next_to(self.slide_title, DOWN, buff=0.5).align_to(self.slide_title, LEFT)
 
-        # --- Animation ---
         for elem in [intro_text, item1, item2, item3, item4, footer]:
             self.play(Write(elem))
             self.wait(0.3)
