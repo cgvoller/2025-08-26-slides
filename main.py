@@ -83,7 +83,6 @@ class Main(Slide, MovingCameraScene):
         super().__init__(*args, **kwargs)
 
         random.seed(1234)
-
         # Colors
         self.camera.background_color = WHITE
         self.BS_COLOR = BLUE_D
